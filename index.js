@@ -1,15 +1,13 @@
 let playerX = Player.getX();
 let playerY = Player.getY();
 let playerZ = Player.getZ();
-
 let toggle = false
+
 register("command", () => {
     playerX = Player.getX();
     playerY = Player.getY();
     playerZ = Player.getZ();
     toggle = !toggle
-    ChatLib.chat(`Toggle has been set to ${toggle}`)
-
     }).setName("toggle")
 
 
@@ -46,4 +44,14 @@ function myWorldRender() {
     Tessellator.drawString("Location #27",playerX + 41 , playerY  -36 , playerZ + 7 );
     Tessellator.drawString("Location #28",playerX + 27 , playerY  -45 , playerZ  -29 );
     Tessellator.drawString("Location #29",playerX + 11 , playerY  -40 , playerZ  -54 );
+}
+
+
+register("renderOverlay", myRenderOverlay);
+
+const myTextObject = new Text("Automatron Route [Toggled]", 490, 8).setColor(Renderer.BLUE);
+
+function myRenderOverlay() {
+    if(!toggle) return
+  myTextObject.draw();
 }
